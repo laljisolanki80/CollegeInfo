@@ -1,0 +1,35 @@
+﻿@page "{Id:int?}"
+@model CollegeInfo.Pages.Colleges.ListModel
+@{
+}
+<h1>Colleges</h1>
+
+<form method="get">
+    <div class="form-group">
+        <div class="input-group">
+            <input type="text" class="form-control" name="SearchTerm" id="search" placeholder="search in list" />
+            <span class="input-group-btn">
+                <button class="btn btn-default">
+                    <i class="glyphicon glyphicon-search"></i>
+                </button>
+            </span>
+        </div>
+    </div>
+</form>
+@foreach (var college in Model.Colleges)
+{
+    <partial name="_Summary" model="college" />
+}
+
+@section Scripts{
+    <script>
+        //script:input search in table
+        $("#search").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+
+            $("#body tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+            });
+        });
+    </script>
+}
